@@ -1,0 +1,23 @@
+name: Run Testsigma Test Plan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  testsigma-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Make Trigger Script Executable
+        run: chmod +x scripts/trigger_testsigma.sh
+
+      - name: Run Testsigma Trigger Script
+        env:
+          TESTSIGMA_API_KEY: ${{ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzOWM2Njc1ZC0yODI4LTRjYzgtOGQ4My1kNzVkZGU2MDNjNjIiLCJkb21haW4iOiJsZW5kZXJwcmljZS5jb20iLCJ0ZW5hbnRJZCI6NjQ0MTIsImlzSWRsZVRpbWVvdXRDb25maWd1cmVkIjpmYWxzZX0.Ikin4knr3-eydn0RvFfahqo1T-8eJRXQriweyn0HIBMjw9QZCBfpt18DhcP9XIpW3tjoKmrd6tFg-hiXK6_PcQ }}
+          TESTSIGMA_TEST_PLAN_ID: ${{ 5689 }}
+        run: ./scripts/trigger_testsigma.sh
